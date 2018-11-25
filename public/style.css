@@ -23,6 +23,6 @@ input.register {
     box-sizing: border-box;
     /*  */
     width: 450px;
-    margin: 0 auto;
+    margin: 40px auto;
   }
 }
