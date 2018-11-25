@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
+const isEmail = require('./app/server/modules/isEmail')
 const mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost:27017/test');
 
@@ -39,8 +40,12 @@ app.post('/', function (req, res) {
       if(docs !== null ){
         res.render('index', {isRegistered: null, error: 'Sorry, The user name already exists!'});
       } else {
-        newUser.save();
-        res.render('index', {isRegistered: "Registered Successfully", error: null});
+        if(isEmail(inputUserEmail)){
+          newUser.save();
+          res.render('index', {isRegistered: "Registered Successfully", error: null});
+        } else {
+          res.render('index', {isRegistered: null, error: 'Sorry, Email fromat wrong!'});
+        }
       }
     }
   });
