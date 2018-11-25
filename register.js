@@ -6,7 +6,7 @@ mongoose.connect('mongodb://localhost:27017/test');
 
 const LoginTest = mongoose.model(
   'LoginTest', {
-    userid: String,
+    userEmail: String,
     password: String 
   }
 );
@@ -23,16 +23,16 @@ app.get('/', function (req, res) {
 
 
 app.post('/', function (req, res) {
-  let inputUserName = req.body.username;
+  let inputUserEmail = req.body.userEmail;
   let inputPassword = req.body.password;
 
   // console debug
-  console.log("Username: "+inputUserName);
+  console.log("userEmail: "+inputUserEmail);
   console.log("User Password: "+inputPassword);
   
-  let newUser = new LoginTest({ userid: inputUserName, password: inputPassword });
-  // Test If Username Exist
-  LoginTest.findOne({'userid': inputUserName}, (err,docs) => {
+  let newUser = new LoginTest({ userEmail: inputUserEmail, password: inputPassword });
+  // Test If userEmail Exist
+  LoginTest.findOne({'userEmail': inputUserEmail}, (err,docs) => {
     if(err){
       res.render('index', {isRegistered: null, error: 'Error, please try again'});
     } else {
