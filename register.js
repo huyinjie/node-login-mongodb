@@ -15,15 +15,12 @@ const LoginTest = mongoose.model(
 // Express
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
-// app.use(express.static('public'));
+app.use(express.static('public'));
 
 app.get('/', function (req, res) {
   res.render('index', {isRegistered: null});
 })
 
-// app.post('/', function (req, res) {
-//   res.render('index', {isRegistered: null});
-// })
 
 app.post('/', function (req, res) {
   let inputUserName = req.body.username;
