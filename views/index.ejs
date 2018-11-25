@@ -13,22 +13,25 @@
           <table width="100%" cellspacing="0" cellpadding="5" border="0">
             <tbody>
                 <tr>
-                    <td width="120" align="right">用户名</td>
+                    <td width="120" align="right">User Name</td>
                     <td width="auto" align="left"><input name="username" type="text" class="ghost-input" placeholder="Enter your ID" required></td>
                 </tr>
                 <tr>
-                    <td width="120" align="right">密码</td>
+                    <td width="120" align="right">Password</td>
                     <td width="auto" align="left"><input name="password" type="text" class="ghost-button" placeholder="Enter Password" required></td>
                 </tr>
                 <tr>
                     <td width="120" align="right"></td>
-                    <td width="auto" align="left"><input name="submit" type="submit" value="注册" class="register"></td>
+                    <td width="auto" align="left"><input name="submit" type="submit" value="Register" class="register"></td>
                 </tr>
             </tbody>
         </table>
         </form>
         <% if(isRegistered !== null){ %>
           <p><%= isRegistered %></p>
+        <% } %>
+        <% if(error !== null){ %>
+          <p><%= error %></p>
         <% } %>
       </fieldset>
     </div>

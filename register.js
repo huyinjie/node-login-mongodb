@@ -18,7 +18,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
 app.get('/', function (req, res) {
-  res.render('index', {isRegistered: null});
+  res.render('index', {isRegistered: null, error: null});
 })
 
 
@@ -31,10 +31,25 @@ app.post('/', function (req, res) {
   console.log("User Password: "+inputPassword);
   
   let newUser = new LoginTest({ userid: inputUserName, password: inputPassword });
-  newUser.save();
-
-  res.render('index', {isRegistered: "Registered OK"});
+  // Test If Username Exist
+  LoginTest.findOne({'userid': inputUserName}, (err,docs) => {
+    if(err){
+      res.render('index', {isRegistered: null, error: 'Error, please try again'});
+    } else {
+      if(docs.userid == inputUserName ){
+        console.log(docs);
+        console.log(docs.userid);
+        res.render('index', {isRegistered: null, error: 'Error, The user name already exists!'});
+      } else {
+        console.log(docs);
+        console.log(docs.userid);
+        newUser.save();
+        res.render('index', {isRegistered: "Registered Successfully", error: null});
+      }
+    }
+  });
 })
+
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
