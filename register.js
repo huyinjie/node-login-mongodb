@@ -37,7 +37,7 @@ app.post('/', function (req, res) {
       res.render('index', {isRegistered: null, error: 'Error, please try again'});
     } else {
       if(docs !== null ){
-        res.render('index', {isRegistered: null, error: 'Error, The user name already exists!'});
+        res.render('index', {isRegistered: null, error: 'Sorry, The user name already exists!'});
       } else {
         newUser.save();
         res.render('index', {isRegistered: "Registered Successfully", error: null});
