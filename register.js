@@ -20,7 +20,7 @@ app.use(express.static('public'));
 
 // Express Router
 app.get('/', function (req, res) {
-  res.render('index', {isRegistered: null, error: null});
+  res.render('register', {isRegistered: null, error: null});
 })
 
 app.post('/', function (req, res) {
@@ -35,16 +35,16 @@ app.post('/', function (req, res) {
   // Test If userEmail Exist
   LoginTest.findOne({'userEmail': inputUserEmail}, (err,docs) => {
     if(err){
-      res.render('index', {isRegistered: null, error: 'Error, please try again'});
+      res.render('register', {isRegistered: null, error: 'Error, please try again'});
     } else {
       if(docs !== null ){
-        res.render('index', {isRegistered: null, error: 'Sorry, The user name already exists!'});
+        res.render('register', {isRegistered: null, error: 'Sorry, The user name already exists!'});
       } else {
         if(isEmail(inputUserEmail)){
           newUser.save();
-          res.render('index', {isRegistered: "Registered Successfully", error: null});
+          res.render('register', {isRegistered: "Registered Successfully", error: null});
         } else {
-          res.render('index', {isRegistered: null, error: 'Sorry, Email fromat wrong!'});
+          res.render('register', {isRegistered: null, error: 'Sorry, Email fromat wrong!'});
         }
       }
     }
