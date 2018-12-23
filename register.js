@@ -3,8 +3,9 @@ const bodyParser = require('body-parser');
 const app = express();
 const isEmail = require('./app/isEmail')
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/test');
+mongoose.connect('mongodb://localhost:27017/node-login');
 
+// Init database document model
 const LoginTest = mongoose.model(
   'LoginTest', {
     userEmail: String,
@@ -12,16 +13,15 @@ const LoginTest = mongoose.model(
   }
 );
 
-
-// Express
+// Init Express
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
+// Express Router
 app.get('/', function (req, res) {
   res.render('index', {isRegistered: null, error: null});
 })
-
 
 app.post('/', function (req, res) {
   let inputUserEmail = req.body.userEmail;
